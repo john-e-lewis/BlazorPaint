@@ -1,0 +1,79 @@
+﻿@inherits CompBlazorPaint_Logic
+@implements IDisposable
+
+
+
+<div>
+
+
+
+    <table>
+
+        <tr>
+            <td>
+
+                <button class="btn btn-primary" onclick="@cmd_clear">Clear</button>
+                <button class="btn btn-primary" onclick="@cmd_undo">undo</button>
+                <br />
+
+
+                <br />
+
+                <div style="vertical-align: middle; margin: 5px">
+                    <button class="btn btn-primary" onclick="@(e => cmd_Move(classes.BPaintMoveDirection.left))">Left</button>
+                    <button class="btn btn-primary" onclick="@(e => cmd_Move(classes.BPaintMoveDirection.right))">Right</button>
+
+
+                    <button class="btn btn-primary" onclick="@(e => cmd_Move(classes.BPaintMoveDirection.up))" style="margin-left:5px">UP</button>
+                    <button class="btn btn-primary" onclick="@(e => cmd_Move(classes.BPaintMoveDirection.down))">Down</button>
+
+                    <input bind="@StepSize" type="number" min="1" max="20" style="margin-left:5px" />
+                </div>
+
+                <br />
+
+
+                <br />
+                <div style="vertical-align: middle; margin: 5px">
+                    <input type="radio" name="mode" value="1" checked="@(modeCode == 1)" onchange="@(() => modeCode = 1)" /> Draw
+                    <input type="radio" name="mode" value="2" checked="@(modeCode == 2)" onchange="@(() => modeCode = 2)" /> Line
+
+                </div>
+
+
+                <input bind="@Color1" type="color" />
+                <input bind="@LineWidth1" type="number" min="1" max="10" />
+
+                <div id="PaintArea1" width="1000" height="700" onmousedown="@cmd_onmousedown" onmousemove="@cmd_onmousemove" onmouseup="@cmd_onmouseup">
+                    <CompMySVG par_width="1000" par_height="700"></CompMySVG>
+
+                </div>
+
+
+            </td>
+            <td>
+                <ul>
+                @foreach (var obj in LocalData.ObjectsList.OrderBy(x=>x.SequenceNumber))
+                {
+            
+                <li>@(@obj.ObjectID +"_"+@obj.ObjectType.ToString())</li>
+            
+                }
+
+            </ul>
+                </td>
+
+                </tr>
+
+
+            </table>
+
+
+
+   
+
+
+
+
+
+</div>
