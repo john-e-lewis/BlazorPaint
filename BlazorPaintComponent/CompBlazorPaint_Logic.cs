@@ -279,7 +279,6 @@ namespace BlazorPaintComponent
           
         }
 
-      
 
         public void GetBoundingClientRect(string ElementID)
         {
