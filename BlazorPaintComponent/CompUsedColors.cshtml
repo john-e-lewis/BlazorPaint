@@ -1,0 +1,19 @@
+﻿@inherits CompUsedColors_Logic
+@implements IDisposable
+
+
+<svg id="svgUsedColors" width="300" height="30" xmlns="http://www.w3.org/2000/svg">
+    <rect x=1
+          y=1
+          width=298
+          height=29
+          fill="wheat"
+          stroke="red"
+          stroke_width=2></rect>
+
+    @for (int i = LocalData.UsedColors_List.Count - 1; i > -1; i--)
+    {
+        <CompChildUsedColor par_id="@i"></CompChildUsedColor>
+    }
+
+</svg>

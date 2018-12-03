@@ -84,18 +84,20 @@ namespace BlazorPaintComponent
                             {
                                 cx = currLine.start.x + currLine.PositionChange.x,
                                 cy = currLine.start.y + currLine.PositionChange.y,
-                                r = 5,
+                                r = currLine.width * 1.5,
                                 fill = "wheat",
                                 stroke = currLine.Color,
+                                stroke_width = 2,
                             });
 
                             _Svg.Children.Add(new circle()
                             {
                                 cx = currLine.end.x + currLine.PositionChange.x,
                                 cy = currLine.end.y + currLine.PositionChange.y,
-                                r = 5,
+                                r = currLine.width * 1.5,
                                 fill = "wheat",
                                 stroke = currLine.Color,
+                                stroke_width = 2,
                             });
                         }
 

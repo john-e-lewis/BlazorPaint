@@ -24,7 +24,30 @@ namespace BlazorPaintComponent
 
 
         protected int modeCode = 1;
-      
+
+
+        protected override void OnInit()
+        {
+            LocalData.UsedColors_List = new List<string>();
+            for (int i = 0; i < 9; i++)
+            {
+                LocalData.UsedColors_List.Add("white");
+            }
+            
+            LocalData.UsedColors_List.Add(Color1);
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                LocalData.Curr_CompChildUsedColor_List.Add(new CompChildUsedColor());
+
+            }
+
+            base.OnInit();
+        }
+
+
+
         protected override void OnAfterRender()
         {
 
@@ -32,7 +55,8 @@ namespace BlazorPaintComponent
             {
                 GetBoundingClientRect("PaintArea1");
 
-
+                LocalData.Curr_CompUsedColors.ActionColorClicked = ColorSelected;
+                LocalData.Curr_CompUsedColors.Refresh();
                 IsCompLoaded = true;
             }
 
@@ -40,6 +64,12 @@ namespace BlazorPaintComponent
 
         }
 
+
+        private void ColorSelected(string a)
+        {
+            Color1 = a;
+            StateHasChanged();
+        }
 
         public void cmd_clear()
         {
@@ -220,6 +250,34 @@ namespace BlazorPaintComponent
         }
 
 
+
+        protected void cmd_ColorChange(UIChangeEventArgs e)
+        {
+            if (e?.Value != null)
+            {
+                Color1 = e.Value as string;
+
+                if (LocalData.UsedColors_List.Any(x => x == Color1))
+                {
+                    LocalData.UsedColors_List.Remove(LocalData.UsedColors_List.Single(x => x == Color1));
+                }
+
+                if (LocalData.UsedColors_List.Count > 9)
+                {
+                    LocalData.UsedColors_List.RemoveAt(0);
+                }
+                LocalData.UsedColors_List.Add(Color1);
+
+
+                Cmd_RefreshUsedColorsSVG();
+            }
+        }
+
+        public void Cmd_RefreshUsedColorsSVG()
+        {
+            LocalData.Curr_CompUsedColors.Refresh();
+            StateHasChanged();
+        }
 
         public void Dispose()
         {

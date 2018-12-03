@@ -42,13 +42,16 @@
                 </div>
 
 
-                <input bind="@Color1" type="color" />
-                <input bind="@LineWidth1" type="number" min="1" max="10" />
+                <input bind="@Color1" type="color" oninput="@cmd_ColorChange" />
 
-                <div id="PaintArea1" width="1000" height="700" onmousedown="@cmd_onmousedown" onmousemove="@cmd_onmousemove" onmouseup="@cmd_onmouseup">
-                    <CompMySVG par_width="1000" par_height="700"></CompMySVG>
+                <CompUsedColors></CompUsedColors>
 
-                </div>
+                    <input bind="@LineWidth1" type="number" min="1" max="10" />
+
+                    <div id="PaintArea1" width="1000" height="700" onmousedown="@cmd_onmousedown" onmousemove="@cmd_onmousemove" onmouseup="@cmd_onmouseup">
+                        <CompMySVG par_width="1000" par_height="700"></CompMySVG>
+
+                    </div>
 
 
             </td>
